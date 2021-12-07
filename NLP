@@ -1,0 +1,76 @@
+# install packages
+
+# !pip install bs4
+# !pip install contractions
+# !pip install wordninja
+# !pip install spellchecker
+# !pip install nltk
+# !pip install spacy
+# !pip install deep_translator
+# !pip install tqdm
+# !pip install langdetect
+# !pip install gensim
+# !pip install contractions
+# !pip install pycld2 
+# !pip install dask
+# !pip install pyLDAvis
+
+
+#import libraries
+
+import pandas as pd
+from pandas.core.common import flatten
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+import re
+from bs4 import BeautifulSoup
+import nltk
+from nltk.corpus import stopwords, wordnet
+from nltk.stem import WordNetLemmatizer
+from nltk import tokenize
+from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer,  TfidfTransformer
+from sklearn.decomposition import LatentDirichletAllocation
+from sklearn.decomposition import NMF
+from sklearn.model_selection import GridSearchCV
+from sklearn.preprocessing import normalize
+from gensim.models import CoherenceModel
+from itertools import chain
+# import spacy
+from string import punctuation
+from deep_translator import GoogleTranslator
+import unicodedata
+#import contractions
+from langdetect import detect
+import time
+import gensim
+from gensim import corpora
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
+import pyLDAvis
+import pyLDAvis.gensim_models as gensimvis
+pyLDAvis.enable_notebook()
+
+nltk.download('stopwords')
+nltk.download('punkt')
+nltk.download('vader_lexicon')
+nltk.download('wordnet')
+nltk.download('omw')
+nltk.download('averaged_perceptron_tagger')
+
+!python -m spacy download en_core_web_sm
+%matplotlib inline
+
+import warnings
+warnings.filterwarnings("ignore")
+
+from tqdm.notebook import tqdm
+tqdm.pandas()
+
+#language detection
+def detect_my(text):
+   try:
+       return detect(text)
+   except:
+       return 'unknown'
+
+df['language'] = df['content'].apply(detect_my)
